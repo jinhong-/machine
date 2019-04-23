@@ -61,7 +61,7 @@ const (
 )
 
 const (
-	driverName = "azure"
+	driverName = "azure1"
 	sshPort    = 22
 )
 

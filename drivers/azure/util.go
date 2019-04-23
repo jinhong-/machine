@@ -10,8 +10,8 @@ import (
 	"github.com/Azure/azure-sdk-for-go/arm/network"
 	"github.com/Azure/go-autorest/autorest/azure"
 	"github.com/Azure/go-autorest/autorest/to"
-	"github.com/docker/machine/drivers/azure/azureutil"
-	"github.com/docker/machine/drivers/azure/logutil"
+	"github.com/jinhong-/machine/drivers/azure/azureutil"
+	"github.com/jinhong-/machine/drivers/azure/logutil"
 	"github.com/docker/machine/drivers/driverutil"
 	"github.com/docker/machine/libmachine/log"
 	"github.com/docker/machine/libmachine/ssh"
@@ -40,8 +40,10 @@ func (r requiredOptionError) Error() string {
 func (d *Driver) newAzureClient() (*azureutil.AzureClient, error) {
 	var env azure.Environment
 	if strings.EqualFold(d.Environment, "custom") {
+		log.Debug("Using Custom Environment")
 		env = environments[azure.PublicCloud.Name]
 		env.ResourceManagerEndpoint = d.ResourceManagerEndpoint
+		env.ServiceManagementEndpoint = d.ServiceManagementEndpoint
 	} else {
 		var ok bool
 		env, ok = environments[d.Environment]

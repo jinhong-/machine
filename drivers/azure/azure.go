@@ -9,7 +9,7 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/docker/machine/drivers/azure/azureutil"
+	"github.com/jinhong-/machine/drivers/azure/azureutil"
 	"github.com/docker/machine/libmachine/drivers"
 	"github.com/docker/machine/libmachine/log"
 	"github.com/docker/machine/libmachine/mcnflag"
@@ -36,6 +36,7 @@ const (
 const (
 	flAzureEnvironment     = "azure-environment"
 	flAzureResourceManagerEndpoint     = "azure-resource-manager-endpoint"
+	flAzureServiceManagementEndpoint = "azure-service-management-endpoint"
 	flAzureSubscriptionID  = "azure-subscription-id"
 	flAzureResourceGroup   = "azure-resource-group"
 	flAzureSSHUser         = "azure-ssh-user"
@@ -73,6 +74,7 @@ type Driver struct {
 
 	Environment    string
 	ResourceManagerEndpoint string
+	ServiceManagementEndpoint string
 	SubscriptionID string
 	ResourceGroup  string
 
@@ -128,6 +130,11 @@ func (d *Driver) GetCreateFlags() []mcnflag.Flag {
 			Name:   flAzureResourceManagerEndpoint,
 			Usage:  "Azure Resource Manager Endpoint",
 			EnvVar: "AZURE_RESOURCE_MANAGER_ENDPOINT",
+		},
+		mcnflag.StringFlag{
+			Name:   flAzureServiceManagementEndpoint,
+			Usage:  "Azure Service Management Endpoint",
+			EnvVar: "AZURE_SERVICE_MANAGEMENT_ENDPOINT",
 		},
 		mcnflag.StringFlag{
 			Name:   flAzureSubscriptionID,
@@ -276,6 +283,7 @@ func (d *Driver) SetConfigFromFlags(fl drivers.DriverOptions) error {
 	// Optional flags or Flags of other types
 	d.Environment = fl.String(flAzureEnvironment)
 	d.ResourceManagerEndpoint = fl.String(flAzureResourceManagerEndpoint)
+	d.ServiceManagementEndpoint = fl.String(flAzureServiceManagementEndpoint)
 	d.OpenPorts = fl.StringSlice(flAzurePorts)
 	d.PrivateIPAddr = fl.String(flAzurePrivateIPAddr)
 	d.UsePrivateIP = fl.Bool(flAzureUsePrivateIP)
@@ -311,7 +319,7 @@ func (d *Driver) PreCreateCheck() (err error) {
 	if err != nil {
 		return err
 	}
-
+	
 	// Register used resource providers with current Azure subscription.
 	if err := c.RegisterResourceProviders(
 		"Microsoft.Compute",

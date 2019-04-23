@@ -127,7 +127,7 @@ func (d *Driver) GetCreateFlags() []mcnflag.Flag {
 		mcnflag.StringFlag{
 			Name:   flAzureResourceManagerEndpoint,
 			Usage:  "Azure Resource Manager Endpoint",
-			EnvVar: "AZURE_RESOURCE_MANAGER_ENDPOINT"
+			EnvVar: "AZURE_RESOURCE_MANAGER_ENDPOINT",
 		},
 		mcnflag.StringFlag{
 			Name:   flAzureSubscriptionID,

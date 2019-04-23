@@ -40,11 +40,11 @@ func (r requiredOptionError) Error() string {
 func (d *Driver) newAzureClient() (*azureutil.AzureClient, error) {
 	var env azure.Environment
 	if strings.EqualFold(d.Environment, "custom") {
-		env := environments[azure.PublicCloud]
+		env = environments[azure.PublicCloud.Name]
 		env.ResourceManagerEndpoint = d.ResourceManagerEndpoint
-	}
-	else {
-		env, ok := environments[d.Environment]
+	} else {
+		var ok bool
+		env, ok = environments[d.Environment]
 		if !ok {
 			valid := make([]string, 0, len(environments))
 			for k := range environments {

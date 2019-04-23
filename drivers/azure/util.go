@@ -38,14 +38,21 @@ func (r requiredOptionError) Error() string {
 // newAzureClient creates an AzureClient helper from the Driver context and
 // initiates authentication if required.
 func (d *Driver) newAzureClient() (*azureutil.AzureClient, error) {
-	env, ok := environments[d.Environment]
-	if !ok {
-		valid := make([]string, 0, len(environments))
-		for k := range environments {
-			valid = append(valid, k)
-		}
+	var env azure.Environment
+	if strings.EqualFold(d.Environment, "custom") {
+		env := environments[azure.PublicCloud]
+		env.ResourceManagerEndpoint = d.ResourceManagerEndpoint
+	}
+	else {
+		env, ok := environments[d.Environment]
+		if !ok {
+			valid := make([]string, 0, len(environments))
+			for k := range environments {
+				valid = append(valid, k)
+			}
 
-		return nil, fmt.Errorf("Invalid Azure environment: %q, supported values: %s", d.Environment, strings.Join(valid, ", "))
+			return nil, fmt.Errorf("Invalid Azure environment: %q, supported values: %s", d.Environment, strings.Join(valid, ", "))
+		}
 	}
 
 	var (

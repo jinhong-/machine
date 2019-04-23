@@ -35,6 +35,7 @@ const (
 
 const (
 	flAzureEnvironment     = "azure-environment"
+	flAzureResourceManagerEndpoint     = "azure-resource-manager-endpoint"
 	flAzureSubscriptionID  = "azure-subscription-id"
 	flAzureResourceGroup   = "azure-resource-group"
 	flAzureSSHUser         = "azure-ssh-user"
@@ -71,6 +72,7 @@ type Driver struct {
 	ClientSecret string // service principal account password
 
 	Environment    string
+	ResourceManagerEndpoint string
 	SubscriptionID string
 	ResourceGroup  string
 
@@ -121,6 +123,11 @@ func (d *Driver) GetCreateFlags() []mcnflag.Flag {
 			Usage:  "Azure environment (e.g. AzurePublicCloud, AzureChinaCloud)",
 			EnvVar: "AZURE_ENVIRONMENT",
 			Value:  defaultAzureEnvironment,
+		},
+		mcnflag.StringFlag{
+			Name:   flAzureResourceManagerEndpoint,
+			Usage:  "Azure Resource Manager Endpoint",
+			EnvVar: "AZURE_RESOURCE_MANAGER_ENDPOINT"
 		},
 		mcnflag.StringFlag{
 			Name:   flAzureSubscriptionID,
@@ -268,6 +275,7 @@ func (d *Driver) SetConfigFromFlags(fl drivers.DriverOptions) error {
 
 	// Optional flags or Flags of other types
 	d.Environment = fl.String(flAzureEnvironment)
+	d.ResourceManagerEndpoint = fl.String(flAzureResourceManagerEndpoint)
 	d.OpenPorts = fl.StringSlice(flAzurePorts)
 	d.PrivateIPAddr = fl.String(flAzurePrivateIPAddr)
 	d.UsePrivateIP = fl.Bool(flAzureUsePrivateIP)

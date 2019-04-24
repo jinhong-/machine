@@ -34,34 +34,34 @@ const (
 )
 
 const (
-	flAzureEnvironment     = "azure-environment"
-	flAzureResourceManagerEndpoint     = "azure-resource-manager-endpoint"
-	flAzureServiceManagementEndpoint = "azure-service-management-endpoint"
-	flAzureSubscriptionID  = "azure-subscription-id"
-	flAzureResourceGroup   = "azure-resource-group"
-	flAzureSSHUser         = "azure-ssh-user"
-	flAzureDockerPort      = "azure-docker-port"
-	flAzureLocation        = "azure-location"
-	flAzureSize            = "azure-size"
-	flAzureImage           = "azure-image"
-	flAzureVNet            = "azure-vnet"
-	flAzureSubnet          = "azure-subnet"
-	flAzureSubnetPrefix    = "azure-subnet-prefix"
-	flAzureAvailabilitySet = "azure-availability-set"
-	flAzurePorts           = "azure-open-port"
-	flAzurePrivateIPAddr   = "azure-private-ip-address"
-	flAzureUsePrivateIP    = "azure-use-private-ip"
-	flAzureStaticPublicIP  = "azure-static-public-ip"
-	flAzureNoPublicIP      = "azure-no-public-ip"
-	flAzureDNSLabel        = "azure-dns"
-	flAzureStorageType     = "azure-storage-type"
-	flAzureCustomData      = "azure-custom-data"
-	flAzureClientID        = "azure-client-id"
-	flAzureClientSecret    = "azure-client-secret"
+	flAzureEnvironment     = "customazure-environment"
+	flAzureResourceManagerEndpoint     = "customazure-resource-manager-endpoint"
+	flAzureServiceManagementEndpoint = "customazure-service-management-endpoint"
+	flAzureSubscriptionID  = "customazure-subscription-id"
+	flAzureResourceGroup   = "customazure-resource-group"
+	flAzureSSHUser         = "customazure-ssh-user"
+	flAzureDockerPort      = "customazure-docker-port"
+	flAzureLocation        = "customazure-location"
+	flAzureSize            = "customazure-size"
+	flAzureImage           = "customazure-image"
+	flAzureVNet            = "customazure-vnet"
+	flAzureSubnet          = "customazure-subnet"
+	flAzureSubnetPrefix    = "customazure-subnet-prefix"
+	flAzureAvailabilitySet = "customazure-availability-set"
+	flAzurePorts           = "customazure-open-port"
+	flAzurePrivateIPAddr   = "customazure-private-ip-address"
+	flAzureUsePrivateIP    = "customazure-use-private-ip"
+	flAzureStaticPublicIP  = "customazure-static-public-ip"
+	flAzureNoPublicIP      = "customazure-no-public-ip"
+	flAzureDNSLabel        = "customazure-dns"
+	flAzureStorageType     = "customazure-storage-type"
+	flAzureCustomData      = "customazure-custom-data"
+	flAzureClientID        = "customazure-client-id"
+	flAzureClientSecret    = "customazure-client-secret"
 )
 
 const (
-	driverName = "azure1"
+	driverName = "customazure"
 	sshPort    = 22
 )
 
@@ -123,87 +123,87 @@ func (d *Driver) GetCreateFlags() []mcnflag.Flag {
 		mcnflag.StringFlag{
 			Name:   flAzureEnvironment,
 			Usage:  "Azure environment (e.g. AzurePublicCloud, AzureChinaCloud)",
-			EnvVar: "AZURE_ENVIRONMENT",
+			EnvVar: "CUSTOMAZURE_ENVIRONMENT",
 			Value:  defaultAzureEnvironment,
 		},
 		mcnflag.StringFlag{
 			Name:   flAzureResourceManagerEndpoint,
 			Usage:  "Azure Resource Manager Endpoint",
-			EnvVar: "AZURE_RESOURCE_MANAGER_ENDPOINT",
+			EnvVar: "CUSTOMAZURE_RESOURCE_MANAGER_ENDPOINT",
 		},
 		mcnflag.StringFlag{
 			Name:   flAzureServiceManagementEndpoint,
 			Usage:  "Azure Service Management Endpoint",
-			EnvVar: "AZURE_SERVICE_MANAGEMENT_ENDPOINT",
+			EnvVar: "CUSTOMAZURE_SERVICE_MANAGEMENT_ENDPOINT",
 		},
 		mcnflag.StringFlag{
 			Name:   flAzureSubscriptionID,
 			Usage:  "Azure Subscription ID",
-			EnvVar: "AZURE_SUBSCRIPTION_ID",
+			EnvVar: "CUSTOMAZURE_SUBSCRIPTION_ID",
 		},
 		mcnflag.StringFlag{
 			Name:   flAzureResourceGroup,
 			Usage:  "Azure Resource Group name (will be created if missing)",
-			EnvVar: "AZURE_RESOURCE_GROUP",
+			EnvVar: "CUSTOMAZURE_RESOURCE_GROUP",
 			Value:  defaultAzureResourceGroup,
 		},
 		mcnflag.StringFlag{
 			Name:   flAzureSSHUser,
 			Usage:  "Username for SSH login",
-			EnvVar: "AZURE_SSH_USER",
+			EnvVar: "CUSTOMAZURE_SSH_USER",
 			Value:  defaultSSHUser,
 		},
 		mcnflag.IntFlag{
 			Name:   flAzureDockerPort,
 			Usage:  "Port number for Docker engine",
-			EnvVar: "AZURE_DOCKER_PORT",
+			EnvVar: "CUSTOMAZURE_DOCKER_PORT",
 			Value:  defaultDockerPort,
 		},
 		mcnflag.StringFlag{
 			Name:   flAzureLocation,
 			Usage:  "Azure region to create the virtual machine",
-			EnvVar: "AZURE_LOCATION",
+			EnvVar: "CUSTOMAZURE_LOCATION",
 			Value:  defaultAzureLocation,
 		},
 		mcnflag.StringFlag{
 			Name:   flAzureSize,
 			Usage:  "Size for Azure Virtual Machine",
-			EnvVar: "AZURE_SIZE",
+			EnvVar: "CUSTOMAZURE_SIZE",
 			Value:  defaultAzureSize,
 		},
 		mcnflag.StringFlag{
 			Name:   flAzureImage,
 			Usage:  "Azure virtual machine OS image",
-			EnvVar: "AZURE_IMAGE",
+			EnvVar: "CUSTOMAZURE_IMAGE",
 			Value:  defaultAzureImage,
 		},
 		mcnflag.StringFlag{
 			Name:   flAzureVNet,
 			Usage:  "Azure Virtual Network name to connect the virtual machine (in [resourcegroup:]name format)",
-			EnvVar: "AZURE_VNET",
+			EnvVar: "CUSTOMAZURE_VNET",
 			Value:  defaultAzureVNet,
 		},
 		mcnflag.StringFlag{
 			Name:   flAzureSubnet,
 			Usage:  "Azure Subnet Name to be used within the Virtual Network",
-			EnvVar: "AZURE_SUBNET",
+			EnvVar: "CUSTOMAZURE_SUBNET",
 			Value:  defaultAzureSubnet,
 		},
 		mcnflag.StringFlag{
 			Name:   flAzureSubnetPrefix,
 			Usage:  "Private CIDR block to be used for the new subnet, should comply RFC 1918",
-			EnvVar: "AZURE_SUBNET_PREFIX",
+			EnvVar: "CUSTOMAZURE_SUBNET_PREFIX",
 			Value:  defaultAzureSubnetPrefix,
 		},
 		mcnflag.StringFlag{
 			Name:   flAzureAvailabilitySet,
 			Usage:  "Azure Availability Set to place the virtual machine into",
-			EnvVar: "AZURE_AVAILABILITY_SET",
+			EnvVar: "CUSTOMAZURE_AVAILABILITY_SET",
 			Value:  defaultAzureAvailabilitySet,
 		},
 		mcnflag.StringFlag{
 			Name:   flAzureCustomData,
-			EnvVar: "AZURE_CUSTOM_DATA_FILE",
+			EnvVar: "CUSTOMAZURE_CUSTOM_DATA_FILE",
 			Usage:  "Path to file with custom-data",
 		},
 		mcnflag.StringFlag{
@@ -213,7 +213,7 @@ func (d *Driver) GetCreateFlags() []mcnflag.Flag {
 		mcnflag.StringFlag{
 			Name:   flAzureStorageType,
 			Usage:  "Type of Storage Account to host the OS Disk for the machine",
-			EnvVar: "AZURE_STORAGE_TYPE",
+			EnvVar: "CUSTOMAZURE_STORAGE_TYPE",
 			Value:  defaultStorageType,
 		},
 		mcnflag.BoolFlag{
@@ -231,7 +231,7 @@ func (d *Driver) GetCreateFlags() []mcnflag.Flag {
 		mcnflag.StringFlag{
 			Name:   flAzureDNSLabel,
 			Usage:  "A unique DNS label for the public IP adddress",
-			EnvVar: "AZURE_DNS_LABEL",
+			EnvVar: "CUSTOMAZURE_DNS_LABEL",
 		},
 		mcnflag.StringSliceFlag{
 			Name:  flAzurePorts,
@@ -240,12 +240,12 @@ func (d *Driver) GetCreateFlags() []mcnflag.Flag {
 		mcnflag.StringFlag{
 			Name:   flAzureClientID,
 			Usage:  "Azure Service Principal Account ID (optional, browser auth is used if not specified)",
-			EnvVar: "AZURE_CLIENT_ID",
+			EnvVar: "CUSTOMAZURE_CLIENT_ID",
 		},
 		mcnflag.StringFlag{
 			Name:   flAzureClientSecret,
 			Usage:  "Azure Service Principal Account password (optional, browser auth is used if not specified)",
-			EnvVar: "AZURE_CLIENT_SECRET",
+			EnvVar: "CUSTOMAZURE_CLIENT_SECRET",
 		},
 	}
 }
@@ -406,9 +406,16 @@ func (d *Driver) Create() error {
 	if err := d.generateSSHKey(d.ctx); err != nil {
 		return err
 	}
-	err = c.CreateVirtualMachine(d.ResourceGroup, d.naming().VM(), d.Location, d.Size, d.ctx.AvailabilitySetID,
-		d.ctx.NetworkInterfaceID, d.BaseDriver.SSHUser, d.ctx.SSHPublicKey, d.Image, customData, d.ctx.StorageAccount)
-	return err
+	if err := c.CreateVirtualMachine(d.ResourceGroup, d.naming().VM(), d.Location, d.Size, d.ctx.AvailabilitySetID,
+		d.ctx.NetworkInterfaceID, d.BaseDriver.SSHUser, d.ctx.SSHPublicKey, d.Image, customData, d.ctx.StorageAccount); err != nil {
+			return err
+	}
+	ip, err := d.GetIP()
+	if err != nil {
+		return err
+	}
+	d.IPAddress = ip
+	return nil
 }
 
 // Remove deletes the virtual machine and resources associated to it.
